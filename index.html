@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تَبيُّن | Tabayyun - SAIF 2026</title>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* === PROFESSIONAL STYLING === */
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'IBM Plex Sans Arabic', sans-serif; }
+        body { background: #f8fafc; color: #1e293b; line-height: 1.6; }
+        .container { max-width: 1000px; margin: 0 auto; padding: 20px; }
+        
+        /* Header - Gradient & Professional */
+        .header { 
+            background: linear-gradient(90deg, #1e3a8a 0%, #3b82f6 100%); 
+            color: white; 
+            padding: 50px 20px; 
+            text-align: center; 
+            border-radius: 16px; 
+            margin-bottom: 40px; 
+            box-shadow: 0 10px 25px rgba(30, 58, 138, 0.2);
+        }
+        .header h1 { font-size: 2.8em; margin-bottom: 10px; font-weight: 700; }
+        .header p { font-size: 1.3em; opacity: 0.95; }
+        .badge { 
+            display: inline-block; 
+            background: rgba(255,255,255,0.2); 
+            padding: 8px 20px; 
+            border-radius: 30px; 
+            margin-top: 20px; 
+            font-size: 0.95em; 
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+
+        /* Sections - Clean Cards */
+        .section { 
+            background: white; 
+            padding: 40px; 
+            border-radius: 16px; 
+            box-shadow: 0 4px 20px rgba(0,0,0,0.03); 
+            margin-bottom: 30px; 
+            border: 1px solid #f1f5f9;
+        }
+        .section h2 { 
+            color: #1e3a8a; 
+            font-size: 1.8em; 
+            margin-bottom: 25px; 
+            border-bottom: 2px solid #e2e8f0; 
+            padding-bottom: 15px; 
+            font-weight: 700;
+        }
+        .section p { font-size: 1.15em; margin-bottom: 20px; color: #334155; }
+
+        /* Features Grid - Colored Borders */
+        .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; margin-top: 30px; }
+        .feature-card { 
+            background: #ffffff; 
+            padding: 25px; 
+            border-radius: 12px; 
+            border-right: 5px solid #3b82f6; 
+            box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+            transition: transform 0.2s;
+        }
+        .feature-card:hover { transform: translateY(-3px); }
+        .feature-card h3 { color: #1e3a8a; margin-bottom: 12px; font-size: 1.2em; }
+
+        /* Screenshots - Rounded & Shadowed */
+        .screenshot-container { text-align: center; margin: 40px 0; }
+        .screenshot-container img { 
+            max-width: 100%; 
+            border-radius: 12px; 
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1); 
+            border: 1px solid #e2e8f0;
+            display: block;
+            margin: 0 auto;
+            transition: transform 0.3s;
+        }
+        .screenshot-container img:hover { transform: scale(1.01); }
+        .screenshot-caption { margin-top: 20px; color: #64748b; font-style: italic; font-size: 1.05em; }
+
+        /* Video Section - Responsive Container */
+        .video-container { 
+            position: relative; 
+            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+            height: 0; 
+            overflow: hidden; 
+            max-width: 100%; 
+            background: #000;
+            border-radius: 16px;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+            margin: 30px 0;
+        }
+        .video-container iframe { 
+            position: absolute; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%; 
+            border: none;
+            border-radius: 16px;
+        }
+
+        /* Team & Footer */
+        .team-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px; text-align: center; }
+        .team-card { background: #f8fafc; padding: 25px; border-radius: 12px; border: 1px solid #e2e8f0; }
+        .team-card h3 { color: #1e3a8a; margin-bottom: 8px; }
+        
+        .footer { text-align: center; padding: 30px; color: #64748b; font-size: 0.95em; margin-top: 50px; border-top: 1px solid #e2e8f0; }
+        
+        @media (max-width: 768px) { 
+            .header h1 { font-size: 2em; } 
+            .team-grid { grid-template-columns: 1fr; } 
+            .section { padding: 25px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>تَبيُّن | Tabayyun</h1>
+            <p>منصة ذكاء اصطناعي لضمان الامتثال وسلامة الإجراءات المؤسسية</p>
+            <div class="badge">SAIF 2026 | نموذج أولي وظيفي (Working Prototype)</div>
+        </div>
+
+        <!-- About Project -->
+        <div class="section">
+            <h2>نبذة عن المشروع</h2>
+            <p>تَبيُّن هو منصة ذكاء اصطناعي مبتكرة تهدف إلى حل مشكلة "فجوة الامتثال الإجرائي" في المؤسسات السعودية. تقوم المنصة بمراجعة الوثائق والإجراءات تلقائياً، واكتشاف التناقضات والمعلومات الناقصة والقديمة، لضمان سلامة المعرفة المؤسسية قبل وقوع الأخطاء.</p>
+        </div>
+
+        <!-- New Features -->
+        <div class="section">
+            <h2>الميزات التقنية الحديثة</h2>
+            <p>تم تطوير النموذج الأولي (Prototype) باستخدام أحدث تقنيات الذكاء الاصطناعي التوليدي (Generative AI) مع التركيز على الخصوصية والأمان:</p>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <h3>تشغيل محلي آمن (On-Premise)</h3>
+                    <p>يعتمد على نموذج Qwen2.5 7B عبر Ollama، مما يضمن بقاء بيانات الجهات الحساسة داخل شبكتها المحلية دون إرسالها للسحابة.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>درجات الثقة (Confidence Scores)</h3>
+                    <p>يحدد النظام نسبة دقة كل تناقض يكتشفه (من 0% إلى 100%)، مما يساعد المدراء على تحديد الأولويات.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>معالجة ملفات PDF العربية</h3>
+                    <p>محرك استخراج نصوص متقدم يدعم الجداول والنصوص العربية المعقدة في الأدلة الإجرائية.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>تصدير التقارير (Export)</h3>
+                    <p>إمكانية تصدير نتائج التحليل كملفات Markdown/PDF رسمية لتقديمها للإدارة العليا.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Video Demo Section -->
+        <div class="section">
+            <h2>الفيديو التوضيحي (Demo Video)</h2>
+            <p>شاهدي كيف يعمل نظام تَبيُّن في اكتشاف التناقضات الإجرائية تلقائياً:</p>
+            
+            <div class="video-container">
+                <iframe 
+                    src="https://www.youtube.com/embed/pbXooKSl3m4" 
+                    title="Tabayyun Demo Video - SAIF 2026"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen>
+                </iframe>
+            </div>
+            
+            <p style="text-align: center; margin-top: 20px;">
+                <a href="https://youtu.be/pbXooKSl3m4" target="_blank" style="color: #3b82f6; text-decoration: none; font-weight: 600; font-size: 1.1em;">
+                    📺 مشاهدة الفيديو على YouTube
+                </a>
+            </p>
+        </div>
+
+        <!-- Screenshots Section -->
+        <div class="section">
+            <h2>لقطات من النظام (Live Prototype)</h2>
+            
+            <div class="screenshot-container">
+                <img src="dashboard.png.png" alt="الواجهة الرئيسية لمنصة تَبيُّن">
+                <p class="screenshot-caption">الواجهة الرئيسية: تظهر المؤشرات الأدائية والشريط الجانبي لحالة النظام.</p>
+            </div>
+
+            <div class="screenshot-container">
+                <img src="analysis_results.png.png" alt="نتائج تحليل التناقضات">
+                <p class="screenshot-caption">نتائج التحليل: اكتشاف التناقضات بين الإجراء الرسمي والدليل الميداني مع درجات الثقة.</p>
+            </div>
+
+            <div class="screenshot-container">
+                <img src="pdf_upload.png.png" alt="ميزة رفع ملفات PDF">
+                <p class="screenshot-caption">ميزة رفع الملفات: استخراج النصوص تلقائياً من ملفات PDF الرسمية.</p>
+            </div>
+        </div>
+
+        <!-- Team -->
+        <div class="section">
+            <h2>فريق التطوير</h2>
+            <div class="team-grid">
+                <div class="team-card">
+                    <h3>AI/ML Engineer</h3>
+                    <p>هندسة الذكاء الاصطناعي والنماذج اللغوية</p>
+                </div>
+                <div class="team-card">
+                    <h3>Backend Developer</h3>
+                    <p>تطوير الواجهات الخلفية وقواعد البيانات</p>
+                </div>
+                <div class="team-card">
+                    <h3>Frontend Developer</h3>
+                    <p>تطوير الواجهات الأمامية وتجربة المستخدم</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p>© 2026 تَبيُّن | مبادرة طالبات سعوديات مستقلة | SAIF 2026</p>
+        </div>
+    </div>
+</body>
+</html>
