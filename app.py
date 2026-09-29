@@ -18,7 +18,6 @@ st.set_page_config(
 )
 
 # Professional Corporate Styling - FIXED TEXT VISIBILITY
-# (UNCHANGED — exact same theme as the file we built last week. Nothing here was touched.)
 st.markdown("""
 <style>
     /* Main Header */
@@ -211,9 +210,7 @@ L = {
         "en": "An intelligent platform using AI to automatically review documents, detect contradictions and missing information, ensuring institutional knowledge integrity before errors occur.",
     },
     "advantages_header": {"ar": "مزايا تنافسية:", "en": "Competitive Advantages:"},
-    # NOTE: this list was corrected earlier this week to match the poster/marketing summary —
-    # "NDMO" was removed (no basis in your materials), and the hosting model + NCA compliance
-    # are now correctly labeled as PLANNED, not as something already in place.
+    # NOTE: this list was corrected to match the poster/marketing summary 
     "advantages_items": {
         "ar": [
             "دعم كامل للغة العربية والسياق الإداري السعودي",
@@ -282,7 +279,6 @@ def t(key: str) -> str:
 
 # NEW: the 5 methodology stages, matching the poster's Methodology box names exactly.
 # Each stage's status/description reflects what the code ACTUALLY does today —
-# not what the poster describes as the full vision. This keeps the interface honest.
 STAGES = [
     {
         "name": {"ar": "الاستيراد", "en": "Ingestion"},
@@ -329,7 +325,7 @@ STAGES = [
 @st.cache_resource
 def load_model():
     try:
-        return ChatOllama(model="qwen2.5:7b-instruct-q4_K_M", temperature=0.1)
+        return ChatOllama(model="qwen2.5:7b-instruct-q4_K_M", temperature=0.1, num_predict=2048, num_ctx=4096)   
     except Exception as e:
         st.error(f"Error loading model: {e}")
         return None
@@ -337,8 +333,36 @@ def load_model():
 model = load_model()
 
 # ==========================================
-# Helper Functions (extraction / analysis — UNCHANGED from last week, still Arabic-only)
+# Helper Functions (extraction / analysis)
 # ==========================================
+
+# Arabic PDF text fix
+# Many PDF producers store Arabic in VISUAL order using "presentation form"
+# glyphs, so pdfplumber returns it reversed and letter-isolated (unreadable to the LLM).
+# This converts it back to normal logical-order Arabic, only triggers when such glyphs are detected, so PDFs that already extract correctly are left untouched.
+import re
+import unicodedata
+try:
+    from bidi.algorithm import get_display
+    _BIDI_AVAILABLE = True
+except ImportError:
+    _BIDI_AVAILABLE = False
+
+_LAM_ALEF = {'\uFEF5': 'آل', '\uFEF6': 'آل', '\uFEF7': 'أل', '\uFEF8': 'أل',
+             '\uFEF9': 'إل', '\uFEFA': 'إل', '\uFEFB': 'ال', '\uFEFC': 'ال'}
+
+def fix_arabic_pdf_text(text: str) -> str:
+    """Repair visual-order Arabic extracted from PDFs (no-op for already-correct text)."""
+    if not _BIDI_AVAILABLE or not re.search(r'[\uFB50-\uFDFF\uFE70-\uFEFF]', text):
+        return text
+    fixed_lines = []
+    for line in text.split("\n"):
+        for ligature, expanded in _LAM_ALEF.items():
+            line = line.replace(ligature, expanded)
+        fixed_lines.append(get_display(unicodedata.normalize("NFKC", line)))
+    return "\n".join(fixed_lines)
+
+
 def extract_text_from_pdf(pdf_file) -> str:
     """Extract text from PDF using pdfplumber"""
     text = ""
@@ -348,7 +372,7 @@ def extract_text_from_pdf(pdf_file) -> str:
                 page_text = page.extract_text()
                 if page_text:
                     text += page_text.strip() + "\n\n"
-        return text
+        return fix_arabic_pdf_text(text)
     except Exception as e:
         st.error(f"Error reading PDF: {e}")
         return ""
@@ -457,7 +481,7 @@ with st.sidebar:
     st.markdown("---")
 
     # NEW: interface language toggle. Only affects UI chrome (labels, tabs, buttons).
-    # Document content and analysis results always stay in Arabic — see note above L dict.
+    # Document content and analysis results always stay in Arabic.
     st.markdown(f"### {t('lang_picker_label')}")
     lang_choice = st.radio(
         "lang", options=["AR", "EN"],
@@ -466,8 +490,7 @@ with st.sidebar:
     )
     st.session_state.lang = "ar" if lang_choice == "AR" else "en"
 
-    # Light/Dark display mode — Option 1 palette (classic corporate, navy/blue),
-    # the one the team picked after comparing both proposals.
+    # Light/Dark display mode 
     st.markdown(f"### {t('theme_picker_label')}")
     theme_choice = st.radio(
         "theme", options=["Light", "Dark"],
@@ -521,8 +544,8 @@ else:
     </style>
     """, unsafe_allow_html=True)
 
-# Dark mode palette — Option 1 (classic corporate). Only applied when the sidebar
-# toggle is set to Dark; Light mode is the original design, untouched.
+# Dark mode palette
+# Only applied when the sidebar toggle is set to Dark
 if st.session_state.theme == "dark":
     st.markdown("""
     <style>
@@ -603,8 +626,7 @@ st.markdown("---")
 # ==========================================
 # NEW: Methodology pipeline status bar
 # Matches the poster's 5 Methodology stage names exactly. Clicking a stage shows
-# its REAL current status (Active / Partially active / Planned) — not the poster's
-# full vision. This is the honesty layer we agreed on.
+# its REAL current status (Active / Partially active / Planned) 
 # ==========================================
 st.markdown(f"**{t('pipeline_title')}**")
 if "selected_stage" not in st.session_state:
